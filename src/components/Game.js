@@ -25,14 +25,6 @@ const Game = ({status, start, fly}) => {
       }
     }
 
-    const handleClick = (e) => {
-      fly()
-
-      if (status !== 'playing') {
-        start()
-      }
-    }
-
     const handleKeyPress = (e) => {
       if (e.keyCode === 32) {
         fly()
@@ -44,7 +36,6 @@ const Game = ({status, start, fly}) => {
     }
 
     document.addEventListener('touchstart', handleTouchStart)
-    document.addEventListener('click', handleClick)
     document.addEventListener('keypress', handleKeyPress)
   }, [])
 
