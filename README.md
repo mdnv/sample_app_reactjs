@@ -1,5 +1,5 @@
-npx create-react-app flappy-bird-react
-cd flappy-bird-react
+npx create-react-app flappy-bird-react<br />
+cd flappy-bird-react<br />
 npm i react-redux redux redux-thunk
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
