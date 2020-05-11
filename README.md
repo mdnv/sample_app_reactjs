@@ -1,4 +1,4 @@
-#flappy-bird-react
+#flappy-bird-react<br>
 npx create-react-app flappy-bird-react<br />
 cd flappy-bird-react<br />
 npm i react-redux redux redux-thunk
