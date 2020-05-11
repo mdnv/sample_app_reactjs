@@ -1,7 +1,10 @@
-#flappy-bird-react<br>
+flappy-bird-react<br /> 
+
 npx create-react-app flappy-bird-react<br />
 cd flappy-bird-react<br />
 npm i react-redux redux redux-thunk
+
+Press Space or Touch to play<br /> 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
