@@ -1,10 +1,43 @@
-flappy-bird-react<br /> 
+1392  npm i axios
+ 1393  npm start
+ 1394  npm i bootstrap
+ 1395  npm start
+ 1396  npm i jquery
+ 1397  npm start
+ 1398  npm i V
+ 1399  npm i popper.js
+ 1400  npm start
+ 1401  npm i react-js-pagination
+ 1402  npm start
+ 1403  npm i react-loading-skeleton
+ 1404  npm start
+ 1405  npm i react-pluralize
+ 1406  npm start
+ 1407  npm i react-router-dom
+ 1408  npm start
+ 1409  npm i react-toastify
+ 1410  npm start
+ 1411  npm i redux-devtools-extension
+ 1412  npm start
+ 1413  git branch
+ 1414  git add .
+ 1415  git commit -m sampleappreact
+ 1416  git push heroku sampleappreact:master
+ 1417  git remote -v
+ 1418  git remote add suborigin git@github.com:mdnv/sample_app_reactjs.git
+ 1419  history
+
+
+--------------------------
+
+
+flappy-bird-react<br />
 
 npx create-react-app flappy-bird-react<br />
 cd flappy-bird-react<br />
 npm i react-redux redux redux-thunk
 
-Press Space or Touch to play<br /> 
+Press Space or Touch to play<br />
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
