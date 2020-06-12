@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 // import {Redirect} from 'react-router-dom'
 // import axios from "axios"
 import {
@@ -15,11 +15,11 @@ const New = ({ userData, fetchUsers }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberme] = useState('1');
-  const inputEl = useRef(null);
+  // const inputEl = useRef(null);
 
-  useEffect(() => {
-    inputEl.current.focus();
-  })
+  // useEffect(() => {
+  //   inputEl.current.focus();
+  // })
 
   const handleEmailInput = e => {
     setEmail(e.target.value);
@@ -32,7 +32,7 @@ const New = ({ userData, fetchUsers }) => {
   };
 
   const handleSubmit = (e) => {
-    inputEl.current.focus();
+    // inputEl.current.focus();
       new API().getHttpClient().post('/login',
         {
           session: {
@@ -73,7 +73,6 @@ const New = ({ userData, fetchUsers }) => {
 
           <label htmlFor="session_email">Email</label>
           <input
-          ref={inputEl}
           className="form-control"
           type="email"
           name="email"
@@ -100,7 +99,6 @@ const New = ({ userData, fetchUsers }) => {
             value="0" />
             <input
             type="checkbox"
-            checked="false"
             name="remember_me"
             id="session_remember_me"
             value={rememberMe}
@@ -133,4 +131,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(New)
-
