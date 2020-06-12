@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 // import {Redirect} from 'react-router-dom';
-import axios from "axios";
 import flashMessage from '../shared/flashMessages'
 import errorMessage from '../shared/errorMessages'
+import API from '../shared/api';
 
 class New extends Component {
     constructor(props) {
@@ -27,34 +27,31 @@ class New extends Component {
   handleSubmit(event) {
     const { name, email, password, password_confirmation } = this.state;
 
-    axios
-      .post(
-        "https://railstutorialapi.herokuapp.com/api/users",
-        {
-          user: {
-            name: name,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.user) {
-          // this.props.handleSuccessfulAuth(response.data);
-          this.setState({errorMessage: ""});
-          flashMessage(...response.data.flash);
-          this.props.history.push("/");
+    new API().getHttpClient().post('/users',
+      {
+        user: {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
         }
-        if (response.data.error) {
-          // this.props.handleSuccessfulAuth(response.data);
-          this.setState({errorMessage: response.data.error});
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      });
+      },
+      { withCredentials: true }
+    ).then(response => {
+      if (response.data.user) {
+        // this.props.handleSuccessfulAuth(response.data);
+        this.setState({errorMessage: ""});
+        flashMessage(...response.data.flash);
+        this.props.history.push("/");
+      }
+      if (response.data.error) {
+        // this.props.handleSuccessfulAuth(response.data);
+        this.setState({errorMessage: response.data.error});
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    });
     event.preventDefault();
   }
 
