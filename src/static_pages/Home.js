@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react'
+import React, { useState, useEffect, useRef }  from 'react'
 import logo from '../logo.svg'
 import {
   NavLink,
@@ -20,7 +20,7 @@ const Home = ({ userData }) => {
   const [gravatar, setGavatar] = useState()
   const [content, setContent] = useState('')
   const [image, setImage] = useState(null);
-  // const inputEl = useRef(null);
+  const inputEl = useRef(null);
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
@@ -73,46 +73,6 @@ const Home = ({ userData }) => {
   };
 
   const handleSubmit = (e) => {
-      // console.log(inputEl.current.files[0])
-      // let image = inputEl.current.files[0]
-      // new API().getHttpClient().post('/microposts',
-      //   {
-      //     micropost: {
-      //       content: content,
-      //       image: image
-      //     }
-      //   },
-      //   { withCredentials: true }
-      // )
-      // .then(response => {
-      //   if (response.data.flash) {
-      //     flashMessage(...response.data.flash)
-      //     setContent('')
-      //     setErrorMessage('')
-      //       new API().getHttpClient().get('',
-      //         {params: {page: page},
-      //         withCredentials: true }
-      //       )
-      //       .then(response => {
-      //         if (response.data.feed_items) {
-      //           setFeedItems(response.data.feed_items)
-      //           setTotalCount(response.data.total_count)
-      //           setMicropost(response.data.micropost)
-      //         } else {
-      //           setFeedItems([])
-      //         }
-      //       })
-      //       .catch(error => {
-      //         console.log(error)
-      //       })
-      //   }
-      //   if (response.data.error) {
-      //     setErrorMessage(response.data.error)
-      //   }
-      // })
-      // .catch(error => {
-      //   console.log(error)
-      // })
       const formData2 = new FormData();
       formData2.append('micropost[content]',
         content
@@ -124,7 +84,14 @@ const Home = ({ userData }) => {
       );
       }
 
-      fetch(`https://railstutorialapi.herokuapp.com/api/microposts`, {
+      var BASE_URL = ''
+      if (process.env.NODE_ENV === 'development') {
+        BASE_URL = 'http://localhost:3001/api';
+      } else if (process.env.NODE_ENV === 'production') {
+        BASE_URL = 'https://railstutorialapi.herokuapp.com/api';
+      }
+
+      fetch(BASE_URL+`/microposts`, {
         method: "POST",
         body: formData2,
         credentials: 'include'
@@ -132,16 +99,15 @@ const Home = ({ userData }) => {
       .then(response => response.json().then(data => {
         
         if (data.flash) {
+          inputEl.current.blur()
           flashMessage(...data.flash)
           setContent('')
           setImage(null)
           document.querySelector('[name="micropost[image]"]').value = null
           setErrorMessage('')
-            new API().getHttpClient().get('',
-              {params: {page: page},
-              withCredentials: true }
-            )
-            .then(response => {
+          new API().getHttpClient().get('', {params: {page: page},
+            withCredentials: true}
+          ).then(response => {
               if (response.data.feed_items) {
                 setFeedItems(response.data.feed_items)
                 setTotalCount(response.data.total_count)
@@ -155,6 +121,7 @@ const Home = ({ userData }) => {
             })
         }
         if (data.error) {
+          inputEl.current.blur()
           setErrorMessage(data.error)
         }
 
@@ -256,7 +223,7 @@ const Home = ({ userData }) => {
                 >
                 </textarea>
             </div>
-            <input type="submit" name="commit" value="Post" className="btn btn-primary" data-disable-with="Post" />
+            <input ref={inputEl} type="submit" name="commit" value="Post" className="btn btn-primary" data-disable-with="Post" />
             <span className="image">
               <input
               accept="image/jpeg,image/gif,image/png"

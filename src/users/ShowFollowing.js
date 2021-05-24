@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import flashMessage from '../shared/flashMessages'
 import { useParams } from "react-router-dom"
 import { NavLink } from "react-router-dom"
+import API from '../shared/api'
 
 export default function ShowFollowing() {
   const [users, setUsers] = useState([])
@@ -16,13 +17,9 @@ export default function ShowFollowing() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    axios
-      .get(
-        'https://railstutorialapi.herokuapp.com/api/users/'+id+'/following',
-        {params: {page: page},
+    new API().getHttpClient().get('users/'+id+'/following', {params: {page: page},
         withCredentials: true }
-      )
-      .then(response => {
+      ).then(response => {
         setUsers(response.data.users);
         setXusers(response.data.xusers);
         setTotalCount(response.data.total_count);
@@ -39,11 +36,8 @@ export default function ShowFollowing() {
   }
 
   const removeUser = (index, userid) => {
-    axios
-      .delete(
-        'https://railstutorialapi.herokuapp.com/api/users/'+userid, { withCredentials: true }
-      )
-      .then(response => {
+    new API().getHttpClient().delete('/users/'+userid, { withCredentials: true }
+      ).then(response => {
         if (response.data.flash) {
           const newUsers = [...users];
           newUsers.splice(index, 1);

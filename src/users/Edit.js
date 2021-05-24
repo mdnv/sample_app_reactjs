@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import axios from 'axios'
 import { useParams } from "react-router-dom"
 import flashMessage from '../shared/flashMessages'
 import Pluralize from 'react-pluralize'
 import { useHistory } from "react-router-dom"
+import API from '../shared/api'
 
 export default function UserEdit(){
   let { id } = useParams();
@@ -17,13 +18,11 @@ export default function UserEdit(){
   const [gravatar, setGravatar] = useState('')
 
   let history = useHistory();
+  const inputEl = useRef(null);
 
   useEffect(() => {
-    axios
-      .get(
-        'https://railstutorialapi.herokuapp.com/api/users/'+id+'/edit', { withCredentials: true }
-      )
-      .then(response => {
+    new API().getHttpClient().get('/users/'+id+'/edit', { withCredentials: true }
+      ).then(response => {
         if (response.data.user) {
           setUser(response.data.user);
           setName(response.data.user.name);
@@ -55,51 +54,46 @@ export default function UserEdit(){
   };
 
   const handleUpdate = (e) => {
-    axios
-      .patch(
-        'https://railstutorialapi.herokuapp.com/api/users/'+id,
-        {
-          user: {
-            name: name,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation
-          }
+    new API().getHttpClient().patch('users/'+id, 
+      { 
+        user: {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: password_confirmation
         },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.flash_success) {
-          flashMessage(...response.data.flash_success)
-          setPassword('')
-          setPasswordConfirmation('')
-          axios
-            .get(
-              'https://railstutorialapi.herokuapp.com/api/users/'+id+'/edit', { withCredentials: true }
-            )
-            .then(response => {
-              if (response.data.user) {
-                setUser(response.data.user);
-                setName(response.data.user.name);
-                setEmail(response.data.user.email);
-                setGravatar(response.data.gravatar);
-              }
-              if (response.data.flash) {
-                flashMessage(...response.data.flash);
-                history.push("/");
-              }
-            })
-            .catch(error => {
-              console.log(error)
-            });
-        }
-        if (response.data.error) {
-          setErrors(response.data.error);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      });
+      },
+      { withCredentials: true }
+    ).then(response => {
+      if (response.data.flash_success) {
+        flashMessage(...response.data.flash_success)
+        setPassword('')
+        setPasswordConfirmation('')
+        new API().getHttpClient().get('/users/'+id+'/edit', { withCredentials: true }
+          ).then(response => {
+            if (response.data.user) {
+              inputEl.current.blur()
+              setUser(response.data.user);
+              setName(response.data.user.name);
+              setEmail(response.data.user.email);
+              setGravatar(response.data.gravatar);
+            }
+            if (response.data.flash) {
+              flashMessage(...response.data.flash);
+              history.push("/");
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          });
+      }
+      if (response.data.error) {
+        setErrors(response.data.error);
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    });
     e.preventDefault();
   }
 
@@ -166,7 +160,7 @@ export default function UserEdit(){
           onChange={handlePasswordConfirmationInput}
           />
 
-          <input type="submit" name="commit" value="Save changes" className="btn btn-primary" data-disable-with="Save changes" />
+          <input ref={inputEl} type="submit" name="commit" value="Save changes" className="btn btn-primary" data-disable-with="Save changes" />
         </form>
         <div className="gravatar_edit">
           <img alt={user.name} className="gravatar" src={"https://secure.gravatar.com/avatar/"+gravatar+"?s=80"} />

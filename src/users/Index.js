@@ -3,7 +3,7 @@ import axios from 'axios'
 import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
 import flashMessage from '../shared/flashMessages'
-import API from '../shared/api';
+import API from '../shared/api'
 
 export default function Users() {
   const [users, setUsers] = useState([])
@@ -34,11 +34,9 @@ export default function Users() {
   const removeUser = (index, userid) => {
     let sure = window.confirm("Are you sure?");
     if (sure === true) {
-      axios
-        .delete(
-          'https://railstutorialapi.herokuapp.com/api/users/'+userid, { withCredentials: true }
-        )
-        .then(response => {
+      new API().getHttpClient().delete('/users/'+userid, {params: {page: page},
+        withCredentials: true }
+      ).then(response => {
           if (response.data.flash) {
             const newUsers = [...users];
             newUsers.splice(index, 1);

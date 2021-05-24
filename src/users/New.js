@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 // import {Redirect} from 'react-router-dom';
 import flashMessage from '../shared/flashMessages'
 import errorMessage from '../shared/errorMessages'
 import API from '../shared/api';
 
 class New extends Component {
-    constructor(props) {
+  constructor(props) {
     super(props);
+    this.myRef = createRef();
     this.state = {
       name: "",
       email: "",
@@ -39,13 +40,13 @@ class New extends Component {
       { withCredentials: true }
     ).then(response => {
       if (response.data.user) {
-        // this.props.handleSuccessfulAuth(response.data);
+        this.myRef.current.blur()
         this.setState({errorMessage: ""});
         flashMessage(...response.data.flash);
         this.props.history.push("/");
       }
       if (response.data.error) {
-        // this.props.handleSuccessfulAuth(response.data);
+        this.myRef.current.blur()
         this.setState({errorMessage: response.data.error});
       }
     })
@@ -114,7 +115,7 @@ class New extends Component {
             onChange={this.handleChange}
             />
 
-            <input type="submit" name="commit" value="Create my account" className="btn btn-primary" data-disable-with="Create my account" />
+            <input ref={this.myRef} type="submit" name="commit" value="Create my account" className="btn btn-primary" data-disable-with="Create my account" />
       </form>  </div>
       </div>
       </React.Fragment>

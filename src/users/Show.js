@@ -4,6 +4,7 @@ import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
 import { useParams } from "react-router-dom"
 import flashMessage from '../shared/flashMessages'
+import API from '../shared/api'
 
 export default function UserShow(){
   const [user, setUser] = useState({})
@@ -15,13 +16,9 @@ export default function UserShow(){
   let { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(
-        'https://railstutorialapi.herokuapp.com/api/users/'+id,
-        {params: {page: page},
+    new API().getHttpClient().get('/users/'+id, {params: {page: page},
         withCredentials: true }
-      )
-      .then(response => {
+      ).then(response => {
         if (response.data.user) {
           setUser(response.data.user);
           setMicroposts(response.data.microposts);
@@ -43,9 +40,8 @@ export default function UserShow(){
   }
 
   const handleUnfollow = (e) => {
-    axios
-      .delete('https://railstutorialapi.herokuapp.com/api/relationships/'+id_relationships, { withCredentials: true })
-      .then(response => {
+    new API().getHttpClient().delete('/relationships/'+id_relationships, { withCredentials: true }
+      ).then(response => {
         if (response.data.unfollow) {
           setIdRelationships(null);
         }
@@ -57,15 +53,9 @@ export default function UserShow(){
   }
 
   const handleFollow = (e) => {
-    axios
-      .post(
-        'https://railstutorialapi.herokuapp.com/api/relationships',
-        {
-          followed_id: id
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
+    new API().getHttpClient().post('/relationships', {followed_id: id},
+        {withCredentials: true }
+      ).then(response => {
         if (response.data.follow) {
           setIdRelationships(1);
         }
@@ -77,20 +67,13 @@ export default function UserShow(){
   }
 
   const removeMicropost = (index, micropostid) => {
-    axios
-      .delete(
-        'https://railstutorialapi.herokuapp.com/api/microposts/'+micropostid, { withCredentials: true }
-      )
-      .then(response => {
+    new API().getHttpClient().delete('/microposts/'+micropostid, { withCredentials: true }
+      ).then(response => {
         if (response.data.flash) {
           flashMessage(...response.data.flash)
-          axios
-            .get(
-              'https://railstutorialapi.herokuapp.com/api/users/'+id,
-              {params: {page: page},
+          new API().getHttpClient().get('/users/'+id, {params: {page: page},
               withCredentials: true }
-            )
-            .then(response => {
+            ).then(response => {
               if (response.data.user) {
                 setUser(response.data.user);
                 setMicroposts(response.data.microposts);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 // import {Redirect} from 'react-router-dom'
 // import axios from "axios"
 import {
@@ -15,7 +15,7 @@ const New = ({ userData, fetchUsers }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberme] = useState('1');
-  // const inputEl = useRef(null);
+  const inputEl = useRef(null);
 
   // useEffect(() => {
   //   inputEl.current.focus();
@@ -32,29 +32,29 @@ const New = ({ userData, fetchUsers }) => {
   };
 
   const handleSubmit = (e) => {
-    // inputEl.current.focus();
-      new API().getHttpClient().post('/login',
-        {
-          session: {
-            email: email,
-            password: password,
-            remember_me: rememberMe
-          }
-        },
-        { withCredentials: true }
-      )
-      .then(response => {
-        if (response.data.user) {
-          fetchUsers();
-          history.push("/users/"+response.data.user.id);
+    inputEl.current.blur()
+    new API().getHttpClient().post('/login',
+      {
+        session: {
+          email: email,
+          password: password,
+          remember_me: rememberMe
         }
-        if (response.data.flash) {
-          flashMessage(...response.data.flash)
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      });
+      },
+      { withCredentials: true }
+    )
+    .then(response => {
+      if (response.data.user) {
+        fetchUsers();
+        history.push("/users/"+response.data.user.id);
+      }
+      if (response.data.flash) {
+        flashMessage(...response.data.flash)
+      }
+    })
+    .catch(error => {
+      console.log(error)
+    });
     e.preventDefault();
   }
 
@@ -106,7 +106,7 @@ const New = ({ userData, fetchUsers }) => {
             />
             <span>Remember me on this computer</span>
           </label>
-          <input type="submit" name="commit" value="Log in" className="btn btn-primary" data-disable-with="Log in" />
+          <input ref={inputEl} type="submit" name="commit" value="Log in" className="btn btn-primary" data-disable-with="Log in" />
         </form>
         <p>New user? <NavLink to="/signup">Sign up now!</NavLink></p>
       </div>
