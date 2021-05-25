@@ -1,9 +1,9 @@
-import React from "react"
+import React from 'react'
 import {
   Route,
   Switch,
   BrowserRouter
-} from "react-router-dom"
+} from 'react-router-dom'
 import { toast } from 'react-toastify'
 import './App.css'
 import 'react-toastify/dist/ReactToastify.css'

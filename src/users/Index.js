@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react"
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
 import flashMessage from '../shared/flashMessages'

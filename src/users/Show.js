@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react"
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
-import { useParams } from "react-router-dom"
+import { useParams } from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import API from '../shared/api'
 

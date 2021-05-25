@@ -1,10 +1,8 @@
 import React, { useState, useRef } from 'react'
-// import {Redirect} from 'react-router-dom'
-// import axios from "axios"
 import {
   NavLink,
   useHistory,
-} from "react-router-dom"
+} from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import { connect } from 'react-redux'
 import { fetchUsers } from '../redux'
@@ -16,10 +14,6 @@ const New = ({ userData, fetchUsers }) => {
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberme] = useState('1')
   const inputEl = useRef(null)
-
-  // useEffect(() => {
-  //   inputEl.current.focus()
-  // })
 
   const handleEmailInput = e => {
     setEmail(e.target.value)
@@ -60,7 +54,6 @@ const New = ({ userData, fetchUsers }) => {
 
   return (
     <React.Fragment>
-    {/* <div className={"alert alert-" + this.state.flash[0]}>{this.state.flash[1]}</div> */}
     <h1>Log in</h1>
     <div className="row">
       <div className="col-md-6 col-md-offset-3">

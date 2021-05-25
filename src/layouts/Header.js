@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import {
   NavLink,
   useHistory,
-} from "react-router-dom"
+} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchUsers } from '../redux'
 import API from '../shared/api'

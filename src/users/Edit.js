@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from "react"
-import axios from 'axios'
-import { useParams } from "react-router-dom"
+import React, { useState, useEffect, useRef } from 'react'
+import { useParams } from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import Pluralize from 'react-pluralize'
-import { useHistory } from "react-router-dom"
+import { useHistory } from 'react-router-dom'
 import API from '../shared/api'
 
 export default function UserEdit(){

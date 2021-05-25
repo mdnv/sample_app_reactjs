@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react"
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
 import flashMessage from '../shared/flashMessages'
-import { useParams } from "react-router-dom"
-import { NavLink } from "react-router-dom"
+import { useParams } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import API from '../shared/api'
 
 export default function ShowFollowing() {
