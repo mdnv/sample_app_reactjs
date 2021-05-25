@@ -1,15 +1,15 @@
-import axios from 'axios';
+import axios from 'axios'
 
 var BASE_URL = ''
 if (process.env.NODE_ENV === 'development') {
-  BASE_URL = 'http://localhost:3001/api';
+  BASE_URL = 'http://localhost:3001/api'
 } else if (process.env.NODE_ENV === 'production') {
-  BASE_URL = 'https://railstutorialapi.herokuapp.com/api';
+  BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
 }
 
 export default class API {
     constructor(lang = 'EN') {
-        this.lang = lang;
+        this.lang = lang
     }
     getHttpClient(baseURL = `${BASE_URL}`) {
         var headers = {
@@ -18,13 +18,13 @@ export default class API {
             'x-lang': this.lang
         }
         if (localStorage.getItem('token') && localStorage.getItem('token') !== 'undefined') {
-            headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+            headers['Authorization'] = `Bearer ${localStorage.getItem('token')}`
         }
-        setTimeout(function(){localStorage.removeItem("token");}, 1000*60*60);
+        setTimeout(function(){localStorage.removeItem("token")}, 1000*60*60)
         this.client = axios.create({
             baseURL: baseURL,
             headers: headers
         })
-        return this.client;
+        return this.client
     }
 }

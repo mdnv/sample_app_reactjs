@@ -19,8 +19,8 @@ const Home = ({ userData }) => {
   const [micropost, setMicropost] = useState()
   const [gravatar, setGavatar] = useState()
   const [content, setContent] = useState('')
-  const [image, setImage] = useState(null);
-  const inputEl = useRef(null);
+  const [image, setImage] = useState(null)
+  const inputEl = useRef(null)
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
@@ -61,34 +61,34 @@ const Home = ({ userData }) => {
 
   const handleImageInput = e => {
     if (e.target.files[0]) {
-      const size_in_megabytes = e.target.files[0].size/1024/1024;
+      const size_in_megabytes = e.target.files[0].size/1024/1024
       if (size_in_megabytes > 512) {
-        alert("Maximum file size is 512MB. Please choose a smaller file.");
-        setImage(null);
-        e.target.value = null;
+        alert("Maximum file size is 512MB. Please choose a smaller file.")
+        setImage(null)
+        e.target.value = null
       } else {
-        setImage(e.target.files[0]);
+        setImage(e.target.files[0])
       }
     }
-  };
+  }
 
   const handleSubmit = (e) => {
-      const formData2 = new FormData();
+      const formData2 = new FormData()
       formData2.append('micropost[content]',
         content
-      );
+      )
       if (image) {
       formData2.append('micropost[image]',
         image,
         image.name
-      );
+      )
       }
 
       var BASE_URL = ''
       if (process.env.NODE_ENV === 'development') {
-        BASE_URL = 'http://localhost:3001/api';
+        BASE_URL = 'http://localhost:3001/api'
       } else if (process.env.NODE_ENV === 'production') {
-        BASE_URL = 'https://railstutorialapi.herokuapp.com/api';
+        BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
       }
 
       fetch(BASE_URL+`/microposts`, {

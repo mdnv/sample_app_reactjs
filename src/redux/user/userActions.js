@@ -3,7 +3,7 @@ import {
   FETCH_USERS_SUCCESS,
   FETCH_USERS_FAILURE
 } from './userTypes'
-import API from '../../shared/api';
+import API from '../../shared/api'
 
 export const fetchUsers = () => {
   return (dispatch) => {

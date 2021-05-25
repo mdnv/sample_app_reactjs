@@ -1,32 +1,32 @@
 import React, { Component, createRef } from 'react'
-// import {Redirect} from 'react-router-dom';
+// import {Redirect} from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import errorMessage from '../shared/errorMessages'
-import API from '../shared/api';
+import API from '../shared/api'
 
 class New extends Component {
   constructor(props) {
-    super(props);
-    this.myRef = createRef();
+    super(props)
+    this.myRef = createRef()
     this.state = {
       name: "",
       email: "",
       password: "",
       password_confirmation: "",
       errorMessage: ""
-    };
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
-    });
+    })
   }
 
   handleSubmit(event) {
-    const { name, email, password, password_confirmation } = this.state;
+    const { name, email, password, password_confirmation } = this.state
 
     new API().getHttpClient().post('/users',
       {
@@ -41,19 +41,19 @@ class New extends Component {
     ).then(response => {
       if (response.data.user) {
         this.myRef.current.blur()
-        this.setState({errorMessage: ""});
-        flashMessage(...response.data.flash);
-        this.props.history.push("/");
+        this.setState({errorMessage: ""})
+        flashMessage(...response.data.flash)
+        this.props.history.push("/")
       }
       if (response.data.error) {
         this.myRef.current.blur()
-        this.setState({errorMessage: response.data.error});
+        this.setState({errorMessage: response.data.error})
       }
     })
     .catch(error => {
       console.log(error)
-    });
-    event.preventDefault();
+    })
+    event.preventDefault()
   }
 
   render() {
@@ -119,8 +119,8 @@ class New extends Component {
       </form>  </div>
       </div>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default New;
+export default New

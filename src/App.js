@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   Route,
   Switch,
@@ -13,13 +13,13 @@ import Footer from './layouts/Footer'
 import routes from './routes'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import HttpsRedirect from 'react-https-redirect';
+import HttpsRedirect from 'react-https-redirect'
 
 toast.configure({
   autoClose: 8000,
   draggable: false,
   position: toast.POSITION.TOP_CENTER,
-});
+})
 const App = () => {
   return (
     <HttpsRedirect>
@@ -46,7 +46,7 @@ const App = () => {
     </BrowserRouter>
     </Provider>
     </HttpsRedirect>
-  );
+  )
 }
 
-export default App;
+export default App

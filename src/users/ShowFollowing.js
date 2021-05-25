@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import axios from 'axios'
 import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
@@ -13,42 +13,42 @@ export default function ShowFollowing() {
   const [page, setPage] = useState(1)
   const [total_count, setTotalCount] = useState(1)
   const current_user = useSelector(state => state.user.users)
-  let { id } = useParams();
-  const [user, setUser] = useState({});
+  let { id } = useParams()
+  const [user, setUser] = useState({})
 
   useEffect(() => {
     new API().getHttpClient().get('users/'+id+'/following', {params: {page: page},
         withCredentials: true }
       ).then(response => {
-        setUsers(response.data.users);
-        setXusers(response.data.xusers);
-        setTotalCount(response.data.total_count);
-        setUser(response.data.user);
+        setUsers(response.data.users)
+        setXusers(response.data.xusers)
+        setTotalCount(response.data.total_count)
+        setUser(response.data.user)
       })
       .catch(error => {
         console.log(error)
-      });
+      })
   }, [page, id])
 
   const handlePageChange = pageNumber => {
-    console.log(`active page is ${pageNumber}`);
-    setPage(pageNumber);
+    console.log(`active page is ${pageNumber}`)
+    setPage(pageNumber)
   }
 
   const removeUser = (index, userid) => {
     new API().getHttpClient().delete('/users/'+userid, { withCredentials: true }
       ).then(response => {
         if (response.data.flash) {
-          const newUsers = [...users];
-          newUsers.splice(index, 1);
-          setUsers(newUsers);
-          flashMessage(...response.data.flash);
+          const newUsers = [...users]
+          newUsers.splice(index, 1)
+          setUsers(newUsers)
+          flashMessage(...response.data.flash)
         }
       })
       .catch(error => {
         console.log(error)
-      });
-  };
+      })
+  }
 
   return (
     <>
@@ -120,5 +120,5 @@ export default function ShowFollowing() {
       </div>
     </div>
     </>
-  );
+  )
 }

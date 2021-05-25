@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom"
 import API from '../shared/api'
 
 export default function UserEdit(){
-  let { id } = useParams();
+  let { id } = useParams()
   const [user, setUser] = useState({})
 
   const [name, setName] = useState('')
@@ -17,41 +17,41 @@ export default function UserEdit(){
   const [errors, setErrors] = useState('')
   const [gravatar, setGravatar] = useState('')
 
-  let history = useHistory();
-  const inputEl = useRef(null);
+  let history = useHistory()
+  const inputEl = useRef(null)
 
   useEffect(() => {
     new API().getHttpClient().get('/users/'+id+'/edit', { withCredentials: true }
       ).then(response => {
         if (response.data.user) {
-          setUser(response.data.user);
-          setName(response.data.user.name);
-          setEmail(response.data.user.email);
-          setGravatar(response.data.gravatar);
+          setUser(response.data.user)
+          setName(response.data.user.name)
+          setEmail(response.data.user.email)
+          setGravatar(response.data.gravatar)
         }
         if (response.data.flash) {
-          flashMessage(...response.data.flash);
-          history.push("/");
+          flashMessage(...response.data.flash)
+          history.push("/")
         }
       })
       .catch(error => {
         console.log(error)
-      });
+      })
   }, [id, history])
 
   const handleNameInput = e => {
-    setName(e.target.value);
-  };
+    setName(e.target.value)
+  }
 
   const handleEmailInput = e => {
-    setEmail(e.target.value);
-  };
+    setEmail(e.target.value)
+  }
   const handlePasswordInput = e => {
-    setPassword(e.target.value);
-  };
+    setPassword(e.target.value)
+  }
   const handlePasswordConfirmationInput = e => {
-    setPasswordConfirmation(e.target.value);
-  };
+    setPasswordConfirmation(e.target.value)
+  }
 
   const handleUpdate = (e) => {
     new API().getHttpClient().patch('users/'+id, 
@@ -73,28 +73,28 @@ export default function UserEdit(){
           ).then(response => {
             if (response.data.user) {
               inputEl.current.blur()
-              setUser(response.data.user);
-              setName(response.data.user.name);
-              setEmail(response.data.user.email);
-              setGravatar(response.data.gravatar);
+              setUser(response.data.user)
+              setName(response.data.user.name)
+              setEmail(response.data.user.email)
+              setGravatar(response.data.gravatar)
             }
             if (response.data.flash) {
-              flashMessage(...response.data.flash);
-              history.push("/");
+              flashMessage(...response.data.flash)
+              history.push("/")
             }
           })
           .catch(error => {
             console.log(error)
-          });
+          })
       }
       if (response.data.error) {
-        setErrors(response.data.error);
+        setErrors(response.data.error)
       }
     })
     .catch(error => {
       console.log(error)
-    });
-    e.preventDefault();
+    })
+    e.preventDefault()
   }
 
   return (

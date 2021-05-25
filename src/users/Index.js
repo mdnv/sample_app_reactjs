@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import axios from 'axios'
 import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
@@ -16,39 +16,39 @@ export default function Users() {
         withCredentials: true }
       ).then(response => {
         if (response.data.users) {
-          setUsers(response.data.users);
-          setTotalCount(response.data.total_count);
+          setUsers(response.data.users)
+          setTotalCount(response.data.total_count)
         } else {
-          setUsers([]);
+          setUsers([])
         }
       })
       .catch(error => {
         console.log(error)
-      });
+      })
   }, [page])
 
   const handlePageChange = pageNumber => {
-    setPage(pageNumber);
+    setPage(pageNumber)
   }
 
   const removeUser = (index, userid) => {
-    let sure = window.confirm("Are you sure?");
+    let sure = window.confirm("Are you sure?")
     if (sure === true) {
       new API().getHttpClient().delete('/users/'+userid, {params: {page: page},
         withCredentials: true }
       ).then(response => {
           if (response.data.flash) {
-            const newUsers = [...users];
-            newUsers.splice(index, 1);
-            setUsers(newUsers);
-            flashMessage(...response.data.flash);
+            const newUsers = [...users]
+            newUsers.splice(index, 1)
+            setUsers(newUsers)
+            flashMessage(...response.data.flash)
           }
         })
         .catch(error => {
           console.log(error)
-        });
+        })
     }
-  };
+  }
 
   return (
     <>
@@ -88,5 +88,5 @@ export default function Users() {
       onChange={handlePageChange}
     />
     </>
-  );
+  )
 }

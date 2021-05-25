@@ -13,43 +13,43 @@ export default function UserShow(){
   const [page, setPage] = useState(1)
   const [total_count, setTotalCount] = useState(1)
   const current_user = useSelector(state => state.user.users)
-  let { id } = useParams();
+  let { id } = useParams()
 
   useEffect(() => {
     new API().getHttpClient().get('/users/'+id, {params: {page: page},
         withCredentials: true }
       ).then(response => {
         if (response.data.user) {
-          setUser(response.data.user);
-          setMicroposts(response.data.microposts);
-          setTotalCount(response.data.total_count);
-          setIdRelationships(response.data.id_relationships);
+          setUser(response.data.user)
+          setMicroposts(response.data.microposts)
+          setTotalCount(response.data.total_count)
+          setIdRelationships(response.data.id_relationships)
         } else {
-          setUser({});
-          setMicroposts([]);
+          setUser({})
+          setMicroposts([])
         }
       })
       .catch(error => {
         console.log(error)
-      });
+      })
   }, [page, id_relationships, id])
 
   const handlePageChange = pageNumber => {
-    console.log(`active page is ${pageNumber}`);
-    setPage(pageNumber);
+    console.log(`active page is ${pageNumber}`)
+    setPage(pageNumber)
   }
 
   const handleUnfollow = (e) => {
     new API().getHttpClient().delete('/relationships/'+id_relationships, { withCredentials: true }
       ).then(response => {
         if (response.data.unfollow) {
-          setIdRelationships(null);
+          setIdRelationships(null)
         }
       })
       .catch(error => {
         console.log(error)
-      });
-    e.preventDefault();
+      })
+    e.preventDefault()
   }
 
   const handleFollow = (e) => {
@@ -57,13 +57,13 @@ export default function UserShow(){
         {withCredentials: true }
       ).then(response => {
         if (response.data.follow) {
-          setIdRelationships(1);
+          setIdRelationships(1)
         }
       })
       .catch(error => {
         console.log(error)
-      });
-    e.preventDefault();
+      })
+    e.preventDefault()
   }
 
   const removeMicropost = (index, micropostid) => {
@@ -75,24 +75,24 @@ export default function UserShow(){
               withCredentials: true }
             ).then(response => {
               if (response.data.user) {
-                setUser(response.data.user);
-                setMicroposts(response.data.microposts);
-                setTotalCount(response.data.total_count);
-                setIdRelationships(response.data.id_relationships);
+                setUser(response.data.user)
+                setMicroposts(response.data.microposts)
+                setTotalCount(response.data.total_count)
+                setIdRelationships(response.data.id_relationships)
               } else {
-                setUser({});
-                setMicroposts([]);
+                setUser({})
+                setMicroposts([])
               }
             })
             .catch(error => {
               console.log(error)
-            });
+            })
         }
       })
       .catch(error => {
         console.log(error)
-      });
-  };
+      })
+  }
 
   return (
     <div className="row">

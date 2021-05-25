@@ -11,25 +11,25 @@ import { fetchUsers } from '../redux'
 import API from '../shared/api'
 
 const New = ({ userData, fetchUsers }) => {
-  let history = useHistory();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [rememberMe, setRememberme] = useState('1');
-  const inputEl = useRef(null);
+  let history = useHistory()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [rememberMe, setRememberme] = useState('1')
+  const inputEl = useRef(null)
 
   // useEffect(() => {
-  //   inputEl.current.focus();
+  //   inputEl.current.focus()
   // })
 
   const handleEmailInput = e => {
-    setEmail(e.target.value);
-  };
+    setEmail(e.target.value)
+  }
   const handlePasswordInput = e => {
-    setPassword(e.target.value);
-  };
+    setPassword(e.target.value)
+  }
   const handleRememberMeInput = e => {
-    setRememberme(e.target.value);
-  };
+    setRememberme(e.target.value)
+  }
 
   const handleSubmit = (e) => {
     inputEl.current.blur()
@@ -45,8 +45,8 @@ const New = ({ userData, fetchUsers }) => {
     )
     .then(response => {
       if (response.data.user) {
-        fetchUsers();
-        history.push("/users/"+response.data.user.id);
+        fetchUsers()
+        history.push("/users/"+response.data.user.id)
       }
       if (response.data.flash) {
         flashMessage(...response.data.flash)
@@ -54,8 +54,8 @@ const New = ({ userData, fetchUsers }) => {
     })
     .catch(error => {
       console.log(error)
-    });
-    e.preventDefault();
+    })
+    e.preventDefault()
   }
 
   return (
@@ -112,7 +112,7 @@ const New = ({ userData, fetchUsers }) => {
       </div>
     </div>
     </React.Fragment>
-  );
+  )
 }
 
 const mapStateToProps = state => {
