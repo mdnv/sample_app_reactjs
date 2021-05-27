@@ -181,7 +181,7 @@ export default function UserShow(){
                 <span className="content">{i.content}</span>
                 <span className="timestamp">
                 {'Posted '+i.timestamp+' ago. '}
-                {user.id === i.user_id &&
+                {current_user.id === i.user_id &&
                   <a href={'#/microposts/'+i.id} onClick={() => removeMicropost(t, i.id)}>delete</a>
                 }
                 </span>
