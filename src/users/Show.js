@@ -104,13 +104,13 @@ export default function UserShow(){
         </section>
         <section className="stats">
           <div className="stats">
-            <a href="/users/1/following">
+            <a href={'/users/'+user.id+'/following'}>
               <strong id="following" className="stat">
                 {user.following}
               </strong>
               following
             </a>
-            <a href="/users/1/followers">
+            <a href={'/users/'+user.id+'/followers'}>
               <strong id="followers" className="stat">
                 {user.followers}
               </strong>
