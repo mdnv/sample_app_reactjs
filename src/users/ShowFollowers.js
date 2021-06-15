@@ -5,7 +5,7 @@ import flashMessage from '../shared/flashMessages'
 import { useParams } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import API from '../shared/api'
-import { selectCurrentUser } from '../redux/user/userSelector'
+import { selectCurrentUser } from '../redux/user/userSlice'
 
 export default function ShowFollowing() {
   const [users, setUsers] = useState([])

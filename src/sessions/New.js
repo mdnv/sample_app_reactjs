@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import { connect } from 'react-redux'
-import { fetchUsers } from '../redux'
+import { fetchUsers } from '../redux/user/userSlice'
 import API from '../shared/api'
 
 const New = ({ userData, fetchUsers }) => {

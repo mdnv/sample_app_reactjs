@@ -3,7 +3,7 @@ import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
 import flashMessage from '../shared/flashMessages'
 import API from '../shared/api'
-import { selectCurrentUser } from '../redux/user/userSelector'
+import { selectCurrentUser } from '../redux/user/userSlice'
 
 export default function Users() {
   const [users, setUsers] = useState([])

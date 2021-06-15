@@ -4,7 +4,7 @@ import {
   useHistory,
 } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchUsers } from '../redux'
+import { fetchUsers } from '../redux/user/userSlice'
 import API from '../shared/api'
 
 export default function Header(){

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import API from '../shared/api'
-import { selectCurrentUser } from '../redux/user/userSelector'
+import { selectCurrentUser } from '../redux/user/userSlice'
 
 export default function UserShow(){
   const [user, setUser] = useState({})
