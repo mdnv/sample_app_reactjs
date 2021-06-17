@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   NavLink,
   useHistory,
@@ -11,10 +11,6 @@ export default function Header(){
   let history = useHistory()
   const userData = useSelector(state => state.user)
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchUsers())
-  }, [dispatch])
 
   const onClick = () => {
       new API().getHttpClient().delete('/logout', { withCredentials: true }

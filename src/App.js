@@ -14,7 +14,8 @@ import routes from './routes'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import HttpsRedirect from 'react-https-redirect'
-
+import { fetchUsers } from './redux'
+store.dispatch(fetchUsers())
 toast.configure({
   autoClose: 8000,
   draggable: false,
