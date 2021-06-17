@@ -3,12 +3,13 @@ import Pagination from 'react-js-pagination'
 import { useSelector } from 'react-redux'
 import flashMessage from '../shared/flashMessages'
 import API from '../shared/api'
+import { selectCurrentUser } from '../redux/user/userSelector'
 
 export default function Users() {
   const [users, setUsers] = useState([])
   const [page, setPage] = useState(1)
   const [total_count, setTotalCount] = useState(1)
-  const current_user = useSelector(state => state.user.users)
+  const current_user = useSelector(selectCurrentUser)
 
   useEffect(() => {
       new API().getHttpClient().get('/users', {params: {page: page},

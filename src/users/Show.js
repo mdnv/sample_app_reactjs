@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import flashMessage from '../shared/flashMessages'
 import API from '../shared/api'
+import { selectCurrentUser } from '../redux/user/userSelector'
 
 export default function UserShow(){
   const [user, setUser] = useState({})
@@ -11,7 +12,7 @@ export default function UserShow(){
   const [id_relationships, setIdRelationships] = useState(null)
   const [page, setPage] = useState(1)
   const [total_count, setTotalCount] = useState(1)
-  const current_user = useSelector(state => state.user.users)
+  const current_user = useSelector(selectCurrentUser)
   let { id } = useParams()
 
   useEffect(() => {
