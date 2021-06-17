@@ -1,11 +1,6 @@
 import axios from 'axios'
 
-var BASE_URL = ''
-if (process.env.NODE_ENV === 'development') {
-  BASE_URL = 'http://localhost:3001/api'
-} else if (process.env.NODE_ENV === 'production') {
-  BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
-}
+var BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
 
 export default class API {
     constructor(lang = 'EN') {

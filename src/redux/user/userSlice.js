@@ -7,7 +7,7 @@ const initialState = {
   error: ''
 };
 
-export const fetchUsers = createAsyncThunk('user/fetchCount', async () => {
+export const fetchUsers = createAsyncThunk('user/getCurrentUser', async () => {
   const response = await new API().getHttpClient().get('/sessions', { withCredentials: true })
   return response.data;
 });

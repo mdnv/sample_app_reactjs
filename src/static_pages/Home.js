@@ -84,12 +84,7 @@ const Home = ({ userData }) => {
       )
       }
 
-      var BASE_URL = ''
-      if (process.env.NODE_ENV === 'development') {
-        BASE_URL = 'http://localhost:3001/api'
-      } else if (process.env.NODE_ENV === 'production') {
-        BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
-      }
+      var BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
 
       fetch(BASE_URL+`/microposts`, {
         method: "POST",
