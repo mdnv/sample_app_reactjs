@@ -179,7 +179,12 @@ export default function UserShow(){
                   <img alt={i.user_name} className="gravatar" src={"https://secure.gravatar.com/avatar/"+user.gravatar_id+"?s=50"} />
                 </a>
                 <span className="user"><a href={'/users/'+i.user_id}>{user.name}</a></span>
-                <span className="content">{i.content}</span>
+                <span className="content">
+                  {i.content}
+                  { i.image &&
+                    <img alt="Example User" src={''+i.image+''} />
+                  }
+                </span>
                 <span className="timestamp">
                 {'Posted '+i.timestamp+' ago. '}
                 {current_user.id === i.user_id &&
