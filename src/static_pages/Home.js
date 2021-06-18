@@ -84,12 +84,25 @@ const Home = ({ userData }) => {
       )
       }
 
-      var BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
+      var BASE_URL = ''
+      if (process.env.NODE_ENV === 'development') {
+        BASE_URL = 'http://localhost:3001/api'
+      } else if (process.env.NODE_ENV === 'production') {
+        BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
+      }
+
+      const getCookie = (name) => {
+        var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+        if (match) return match[2];
+      }
 
       fetch(BASE_URL+`/microposts`, {
         method: "POST",
         body: formData2,
-        credentials: 'include'
+        credentials: 'include',
+        headers: {
+          'X-CSRF-Token': getCookie('CSRF-TOKEN')
+        }
       })
       .then(response => response.json().then(data => {
         
