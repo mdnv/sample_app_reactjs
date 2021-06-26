@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-var BASE_URL = ''
+let BASE_URL = ''
 if (process.env.NODE_ENV === 'development') {
   BASE_URL = 'http://localhost:3001/api'
-} else if (process.env.NODE_ENV === 'production') {
+} else {
   BASE_URL = 'https://railstutorialapi.herokuapp.com/api'
 }
 
@@ -14,7 +14,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRF-Token';
 axios.defaults.withCredentials = true;
 
 const getCookie = (name) => {
-    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     if (match) return match[2];
 }
 

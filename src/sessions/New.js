@@ -39,6 +39,7 @@ const New = ({ userData, fetchUsers }) => {
     )
     .then(response => {
       if (response.data.user) {
+        localStorage.setItem("token", response.data.jwt)
         fetchUsers()
         history.push("/users/"+response.data.user.id)
       }

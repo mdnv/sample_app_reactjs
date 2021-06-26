@@ -15,6 +15,7 @@ export default function Header(){
   const onClick = () => {
       new API().getHttpClient().delete('/logout', { withCredentials: true }
       ).then(response => {
+        localStorage.removeItem("token")
         dispatch(fetchUsers())
         history.push("/")
       })
