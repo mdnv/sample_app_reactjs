@@ -101,7 +101,8 @@ const Home = ({ userData }) => {
         body: formData2,
         credentials: 'include',
         headers: {
-          'X-CSRF-Token': getCookie('CSRF-TOKEN')
+          'X-CSRF-Token': getCookie('CSRF-TOKEN'),
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
       .then(response => response.json().then(data => {
